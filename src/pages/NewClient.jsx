@@ -1,10 +1,13 @@
-import {Outlet} from 'react-router-dom'
+import { Form } from "../components/Form"
+
 
 export const NewClient = () => {
   return (
-    <div>NewClient
-        <Outlet />
-    </div>
+    <>
+     <h1 className="font-black text-4xl text-orange-600">New Client</h1>
+     <p className="mt-3">Llena el siguiente  formulario para registrar un cliente</p>
+     <Form />  
+    </>
   )
 }
 
