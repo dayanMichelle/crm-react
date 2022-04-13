@@ -1,8 +1,10 @@
-import React from 'react'
+import {Outlet} from 'react-router-dom'
 
 export const NewClient = () => {
   return (
-    <div>NewClient</div>
+    <div>NewClient
+        <Outlet />
+    </div>
   )
 }
 
