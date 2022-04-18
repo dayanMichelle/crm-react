@@ -1,0 +1,20 @@
+{
+  "clients": [
+    {
+      "name": "dayan",
+      "company": "voxcom",
+      "email": "dayaara@gmail.com",
+      "phone": "983248348",
+      "note": "probando apícola",
+      "id": 1
+    },
+    {
+      "name": "Paulina",
+      "company": "Paulina construcciones",
+      "email": "correopau@gmail.com",
+      "phone": "993823489",
+      "note": "Build ",
+      "id": 2
+    }
+  ]
+}

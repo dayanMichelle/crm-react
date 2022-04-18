@@ -1,7 +1,9 @@
 import { Formik, Form, Field } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Alert from "./Alert";
 export const FormClient = () => {
+  const navigate = useNavigate()
   const newClientSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Too Short!")
@@ -15,8 +17,21 @@ export const FormClient = () => {
       .positive("Number is not valid"),
   });
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    try {
+      const url = 'http://localhost:4000/clients';
+      const response = await fetch(url,{
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers :{
+          'Content-Type': 'application/json'
+        }
+      });
+      const res = await response.json();
+      navigate('/clients');
+    } catch (error) {
+      console.log(error)
+    }   
   };
   return (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
@@ -31,8 +46,9 @@ export const FormClient = () => {
           phone: "",
           note: "",
         }}
-        onSubmit={(values) => {
+        onSubmit={ async (values,{resetForm}) => {
           handleSubmit(values);
+          resetForm()
         }}
         validationSchema={newClientSchema}
       >
