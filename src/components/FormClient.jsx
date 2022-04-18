@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Alert from "./Alert";
-export const FormClient = () => {
+export const FormClient = ({client}) => {
   const navigate = useNavigate()
   const newClientSchema = Yup.object().shape({
     name: Yup.string()
@@ -36,16 +36,17 @@ export const FormClient = () => {
   return (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
       <h1 className="text-gray-600 font-bold text-xl uppercase text-center">
-        Add Client
+        {client?.name ? "Edit Client" : "New Client"}
       </h1>
       <Formik
         initialValues={{
-          name: "",
-          company: "",
-          email: "",
-          phone: "",
-          note: "",
+          name: client.name || "",
+          company: client.company || "",
+          email: client.email || "",
+          phone: client.phone || "",
+          note: client.note || "",
         }}
+        enableReinitialize={true}
         onSubmit={ async (values,{resetForm}) => {
           handleSubmit(values);
           resetForm()
@@ -130,7 +131,7 @@ export const FormClient = () => {
               </div>
               <input
                 type="submit"
-                value="Add Client"
+                value={client?.name ? "Edit" : "New"}
                 className="mt-5 w-full bg-orange-500 p-3 text-white uppercase font-bold text-lg"
               />
             </Form>
@@ -140,3 +141,8 @@ export const FormClient = () => {
     </div>
   );
 };
+
+FormClient.defaultProps = {
+  client: {}
+}
+
