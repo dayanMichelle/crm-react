@@ -63,8 +63,7 @@ export const SeeClient = () => {
         {client.note && (
           <p className="text-2xl text-gray-600 mt-4">
             <span className="text-gray-800 uppercase font-bold">Notes: </span>
-            {client.note}
-            fre
+            {client.note}      
           </p>
         )}
       </>
