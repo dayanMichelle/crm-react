@@ -7,7 +7,7 @@ import { NewClient } from './pages/NewClient'
 import {SeeClient} from './pages/SeeClient'
 
 function App() {
-  import.meta.env
+  
   return (
     <BrowserRouter>
       <Routes>

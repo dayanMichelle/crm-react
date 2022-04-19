@@ -1,20 +1,3 @@
 {
-  "clients": [
-    {
-      "name": "Paulina actualizado",
-      "company": "Paulina construcciones",
-      "email": "correopau@gmail.com",
-      "phone": "993823489",
-      "note": "Build ",
-      "id": 2
-    },
-    {
-      "name": "actual michelle ",
-      "company": "google",
-      "email": "gogole@google.cl",
-      "phone": "9333333",
-      "note": "aqui editando bb",
-      "id": 3
-    }
-  ]
+  "clients": []
 }
