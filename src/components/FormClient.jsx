@@ -1,9 +1,10 @@
 import { Formik, Form, Field } from "formik";
 import { useNavigate } from "react-router-dom";
+import { Spiner } from "./Spiner";
 import * as Yup from "yup";
 import Alert from "./Alert";
-export const FormClient = ({client}) => {
-  const navigate = useNavigate()
+export const FormClient = ({ client, loading }) => {
+  const navigate = useNavigate();
   const newClientSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Too Short!")
@@ -19,21 +20,37 @@ export const FormClient = ({client}) => {
 
   const handleSubmit = async (values) => {
     try {
-      const url = 'http://localhost:4000/clients';
-      const response = await fetch(url,{
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers :{
-          'Content-Type': 'application/json'
-        }
-      });
-      const res = await response.json();
-      navigate('/clients');
+      let response;
+      if (client.id) {
+        // Update client
+        const url = `http://localhost:4000/clients/${client.id}`;
+         response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        //New client
+        const url = "http://localhost:4000/clients";
+         response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+  
+      navigate("/clients");
     } catch (error) {
-      console.log(error)
-    }   
+      console.log(error);
+    }
   };
-  return (
+  return loading ? (
+    <Spiner />
+  ) : (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
       <h1 className="text-gray-600 font-bold text-xl uppercase text-center">
         {client?.name ? "Edit Client" : "New Client"}
@@ -47,9 +64,9 @@ export const FormClient = ({client}) => {
           note: client.note || "",
         }}
         enableReinitialize={true}
-        onSubmit={ async (values,{resetForm}) => {
+        onSubmit={async (values, { resetForm }) => {
           handleSubmit(values);
-          resetForm()
+          resetForm();
         }}
         validationSchema={newClientSchema}
       >
@@ -143,6 +160,6 @@ export const FormClient = ({client}) => {
 };
 
 FormClient.defaultProps = {
-  client: {}
-}
-
+  client: {},
+  loading: false,
+};

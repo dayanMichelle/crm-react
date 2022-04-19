@@ -17,6 +17,23 @@ export const Home = () => {
     }
     getClientAPI()
   }, [])
+  const handleDelete = async (id) => {
+    const confirmDelete  = confirm("Are you sure?")
+    if(confirmDelete)
+    {
+      try {
+        const url = `http://localhost:4000/clients/${id}`
+        const response = await fetch(url,{
+          method: 'DELETE'
+        })
+        await response.json()
+        const arrayClients = clients.filter(client => client.id !== id)
+        setClients(arrayClients)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
   return (
     <>
     <h1 className="font-black text-4xl text-orange-600">Clients</h1>
@@ -26,10 +43,9 @@ export const Home = () => {
       <thead className="bg-blue-800 text-white">
       <tr>
         <th className="p-2">Name</th>
+        <th className="p-2">Contact</th>
         <th className="p-2">Company</th>
-        <th className="p-2">Email</th>
-        <th className="p-2">Phone</th>
-        <th className="p-2">Notes</th>
+        <th className="p-2">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -38,6 +54,7 @@ export const Home = () => {
             <Client 
             key={client.id}
             client={client}
+            handleDelete={handleDelete}
             />
           
 

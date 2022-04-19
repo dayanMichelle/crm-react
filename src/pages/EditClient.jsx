@@ -28,7 +28,12 @@ export const EditClient = () => {
     <>
     <h1 className="font-black text-4xl text-orange-600">Edit Client</h1>
     <p className="mt-3">Update data</p>
-    <FormClient client={client} />  
+    {client?.name ? (
+         <FormClient loading={loading} client={client} />  
+    ):
+    <p>Id's client is not valid.</p>
+    }
+ 
    </>
   )
 }
