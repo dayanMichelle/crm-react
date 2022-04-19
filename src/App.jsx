@@ -11,7 +11,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
+      <Route path="/" element={<Layout />}>
+        
+      </Route>
         <Route path="/clients" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="new" element={<NewClient />} />
