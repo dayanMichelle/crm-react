@@ -7,7 +7,7 @@ export const Home = () => {
     const getClientAPI =  async  () =>
     {
       try {
-        const url = 'http://localhost:4000/clients'
+        const url = 'https://my-json-server.typicode.com/dayanMichelle/crm-react/clients'
         const response = await fetch(url);
         const result = await response.json()
         setClients(result)
